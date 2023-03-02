@@ -19,9 +19,11 @@
         <property name="manager" ref="manager"/>
     </bean>
 
-    <bean id="developer" class="tech.enfint.Developer" scope="singleton" >
-        <constructor-arg name="manager" ref="manager"/>
-    </bean>
+    <bean id="developer" class="tech.enfint.Developer" scope="singleton" />
+
+    <bean id="developerFactory" class="tech.enfint.Developer" factory-bean="factoryDev" scope="singleton" />
+
+
 
 </beans>
 
