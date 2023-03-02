@@ -8,13 +8,14 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="com.baeldung.applicationcontext"/>
+    <context:property-placeholder location="properties"/>
 
     <bean id="manager" class="tech.enfint.Manager" scope="singleton">
         <property name="name" value="Alex"/>
     </bean>
 
     <bean id="project" class="tech.enfint.Project"  scope="prototype" >
-        <property name="name" value="${pom.project.name}"/>
+        <property name="name" value="${name}"/>
         <property name="manager" ref="manager"/>
     </bean>
 

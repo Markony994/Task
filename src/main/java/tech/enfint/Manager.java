@@ -3,10 +3,10 @@ package tech.enfint;
 public class Manager
 {
 
-    public static String name;
+    private String name;
 
-    public static void setName(String name) {
-        Manager.name = name;
+    public void setName(String name) {
+       this.name = name;
     }
 
     @Override
