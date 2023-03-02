@@ -1,0 +1,32 @@
+1) Create maven application
+2) Add dependencies
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+3) Define class Manager with field name. 
+4) In application context describe bean manager.
+Value for field name must injected as constant "Alex"
+5)Define class Project with scope prototype with fieds
+name: type String
+manager: type Manager
+6) In application context describe bean project.
+7) Value for field Project.name must injected from propertis file
+8) Value for field Project.manager must inject using setter method
+9) Define class Developer with field manager;
+10) In application context describe bean developer with scope singleton
+11) Value for manager must must inject using contstructor
+12) Create Main class with main method, get from context beans project and developer.
