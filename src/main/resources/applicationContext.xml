@@ -19,11 +19,11 @@
         <property name="manager" ref="manager"/>
     </bean>
 
-    <bean id="developer" class="tech.enfint.Developer" scope="singleton" />
+    <bean id="developer" class="tech.enfint.Developer" init-method="init" destroy-method="destroy" scope="singleton" />
 
-    <bean id="developerFactory" class="tech.enfint.Developer" factory-bean="factoryDev" scope="singleton" />
-
-
+    <bean id="developerFactoryMethod" class="tech.enfint.Developer" autowire="constructor" factory-method="factoryDev" scope="singleton">
+<!--        <constructor-arg type="tech.enfint.Manager" ref="manager"/>-->
+    </bean>
 
 </beans>
 

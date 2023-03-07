@@ -13,9 +13,15 @@ public class Main
 
         System.out.println(project);
 
-        Developer developer = context.getBean("developerFactory", Developer.class);
+//        Developer singletonDeveloper = context.getBean("developerFactoryMethod", Developer.class);
+//
+//        System.out.println("singletonDeveloper:");
+//        System.out.println(singletonDeveloper);
 
-        System.out.println(developer);
+        Developer prototypeDeveloper = context.getBean("developerFactoryMethod", Developer.class);
+
+        System.out.println("prototypeDeveloper:");
+        System.out.println(prototypeDeveloper);
 
         context.close();
 
