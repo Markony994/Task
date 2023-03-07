@@ -13,11 +13,6 @@ public class Main
 
         System.out.println(project);
 
-//        Developer singletonDeveloper = context.getBean("developerFactoryMethod", Developer.class);
-//
-//        System.out.println("singletonDeveloper:");
-//        System.out.println(singletonDeveloper);
-
         Developer prototypeDeveloper = context.getBean("developerFactoryMethod", Developer.class);
 
         System.out.println("prototypeDeveloper:");
