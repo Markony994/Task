@@ -2,9 +2,9 @@ package tech.enfint;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
-@Component
 @Scope(scopeName = "singleton")
 public class Developer
 {
@@ -25,18 +25,19 @@ public class Developer
         this.manager = manager;
     }
 
-    @Bean(name = "factoryDev")
-    public static Developer factoryDev(Manager manager)
-    {
-        return new Developer(manager);
-    }
+//    @Bean(name = "factoryDev")
+//    public static Developer factoryDev(Manager manager)
+//    {
+//        return new Developer(manager);
+//    }
 
-    @Bean(initMethod = "init")
+    @PostConstruct
     public void init()
     {
         System.out.println(this + " has been initialized");
     }
 
+    @PreDestroy
     @Bean(destroyMethod = "destroy")
     public void destroy()
     {
