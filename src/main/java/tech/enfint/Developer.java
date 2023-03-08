@@ -1,7 +1,7 @@
 package tech.enfint;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -38,7 +38,6 @@ public class Developer
     }
 
     @PreDestroy
-    @Bean(destroyMethod = "destroy")
     public void destroy()
     {
         System.out.println(this + " had been destroyed");
