@@ -1,19 +1,19 @@
 package tech.enfint;
 
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main
 {
     public static void main(String[] args)
     {
-        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        Project project = context.getBean("project", Project.class);
+        Project project = context.getBean(Project.class);
 
         System.out.println(project);
 
-        Developer developer = context.getBean("developerFactoryMethod", Developer.class);
+        Developer developer = context.getBean("factoryDev", Developer.class);
 
         System.out.println(developer);
 

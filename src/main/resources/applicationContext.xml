@@ -10,20 +10,20 @@
     <context:component-scan base-package="com.baeldung.applicationcontext"/>
     <context:property-placeholder location="properties"/>
 
-    <bean id="manager" class="tech.enfint.Manager" scope="singleton">
-        <property name="name" value="Alex"/>
-    </bean>
+<!--    <bean id="manager" class="tech.enfint.Manager" scope="singleton">-->
+<!--        <property name="name" value="Alex"/>-->
+<!--    </bean>-->
 
-    <bean id="project" class="tech.enfint.Project"  scope="prototype" >
-        <property name="name" value="${name}"/>
-        <property name="manager" ref="manager"/>
-    </bean>
+<!--    <bean id="project" class="tech.enfint.Project"  scope="prototype" >-->
+<!--        <property name="name" value="${name}"/>-->
+<!--        <property name="manager" ref="manager"/>-->
+<!--    </bean>-->
 
-    <bean id="developer" class="tech.enfint.Developer" init-method="init" destroy-method="destroy" scope="singleton" />
+<!--    <bean id="developer" class="tech.enfint.Developer" init-method="init" destroy-method="destroy" scope="singleton" />-->
 
-    <bean id="developerFactoryMethod" class="tech.enfint.Developer" autowire="constructor" factory-method="factoryDev" scope="singleton">
-<!--        <constructor-arg type="tech.enfint.Manager" ref="manager"/>-->
-    </bean>
+<!--    <bean id="developerFactoryMethod" class="tech.enfint.Developer" autowire="constructor" factory-method="factoryDev" scope="singleton">-->
+<!--&lt;!&ndash;        <constructor-arg name="manager" ref="manager"/>&ndash;&gt;-->
+<!--    </bean>-->
 
 </beans>
 
