@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig
 {
     @Bean
-    public static Developer factoryDev(Manager manager)
+    public Developer factoryDev(Manager manager)
     {
         return new Developer(manager);
     }
