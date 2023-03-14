@@ -15,6 +15,10 @@ public class Main
 
         Developer developer = context.getBean("factoryDev", Developer.class);
 
+        developer.setManager(new Manager());
+
+        System.out.println(developer.divide(10, 0));
+
         System.out.println(developer);
 
         context.close();

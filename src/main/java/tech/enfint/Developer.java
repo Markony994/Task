@@ -20,6 +20,11 @@ public class Developer
         this.manager = manager;
     }
 
+    public int divide(int x, int y)
+    {
+        return x / y;
+    }
+
     public void setManager(Manager manager)
     {
         this.manager = manager;
