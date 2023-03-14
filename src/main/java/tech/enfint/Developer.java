@@ -20,10 +20,13 @@ public class Developer
         this.manager = manager;
     }
 
+    @Logging(fieldType = FieldType.ERROR)
     public int divide(int x, int y)
     {
         return x / y;
     }
+
+    @Logging(fieldType = FieldType.ENTRY)
 
     public void setManager(Manager manager)
     {
@@ -47,6 +50,8 @@ public class Developer
     {
         System.out.println(this + " had been destroyed");
     }
+
+    @Logging(fieldType = FieldType.EXIT)
 
     @Override
     public String toString() {
