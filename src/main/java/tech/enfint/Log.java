@@ -4,9 +4,12 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 @Aspect
 @Component
@@ -19,22 +22,25 @@ public class Log
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
         Method method = signature.getMethod();
 
-        Logging myAnnotation = method.getAnnotation(Logging.class);
-        FieldType type = myAnnotation.fieldType();
+        final Logger logger
+                = LoggerFactory.getLogger(signature.getClass());
 
-        if(type == FieldType.ENTRY)
+        Logging myAnnotation = method.getAnnotation(Logging.class);
+        List<FieldType> types = List.of(myAnnotation.logTypes());
+
+        if(types.contains(FieldType.ENTRY))
         {
             String name = proceedingJoinPoint.getSignature().getName();
             Object[] args = proceedingJoinPoint.getArgs();
 
-            String stringArgs = "";
+            String stringArgs = args[0].toString();
 
-            for(Object arg : args)
+            for(int i = 1; i < args.length; i++)
             {
-                stringArgs += arg.toString();
+                stringArgs += ", " + args[i].toString();
             }
 
-            System.out.println("\nMethod has been run:\nName: " + name + "; args:\n" +
+            logger.info("\nMethod has been run:\nName: " + name + "; args:\n" +
                     (stringArgs.length() > 0 ? stringArgs : "none"));
         }
 
@@ -44,17 +50,17 @@ public class Log
         {
             returnValue = proceedingJoinPoint.proceed();
 
-            if(type == FieldType.EXIT)
+            if(types.contains(FieldType.EXIT))
             {
-                System.out.println("Method finished running successfully: " + returnValue);
+                logger.info("Method finished running successfully: " + returnValue);
             }
 
         }
         catch (Exception ex)
         {
-            if(type == FieldType.ERROR)
+            if(types.contains(FieldType.ERROR))
             {
-                System.out.println("Method finished running with error:\n" + ex);
+                logger.error("Method finished running with error:\n" + ex);
 
                 throw ex;
             }
