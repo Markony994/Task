@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.MockitoAnnotations.openMocks;
 
 public class DeveloperTest
 {
@@ -30,13 +30,14 @@ public class DeveloperTest
     ProceedingJoinPoint proceedingJoinPoint;
     private ConfigurableApplicationContext context;
     final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static AutoCloseable closeable;
 
     @Before
     public void setUp()
     {
         // Configure the bean to be added to application context and set mock dependencies, to avoid bean initialization exception.
         final Developer developer = new Developer();
-        initMocks(this);
+        closeable = openMocks(this);
         //set here other dependencies on victim if required
         context = new AnnotationConfigApplicationContext(AppConfig.class);
         final AutowireCapableBeanFactory autowireFactory = context.getAutowireCapableBeanFactory();
@@ -44,8 +45,9 @@ public class DeveloperTest
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws Exception {
         context.close();
+        closeable.close();
     }
 
     @Test
@@ -63,7 +65,6 @@ public class DeveloperTest
     {
         assertEquals(2, victim.divide(10, 5));
 
-        victim.divide(10, 5);
         verify(proceedingJoinPoint, times(1)).proceed();
     }
 
